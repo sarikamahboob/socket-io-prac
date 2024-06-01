@@ -1,25 +1,18 @@
-import { useEffect } from "react";
-import { io } from "socket.io-client"
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from "./components/Home";
+import About from "./components/About";
 
 function App() {
-  const socket = io("http://localhost:3000");
-  useEffect(() => {
-    socket.on("connect", () => {
-      console.log('connected in main')
-    })
-    socket.on("welcome", (data) => {
-      console.log(data);
-    });
-    return () => {
-      socket.disconnect();
-    };
-  }, [])
+  
   return (
-    <>
-      <p className="read-the-docs">
-        App
-      </p>
-    </>
+    <div>
+      <Router>
+        <Routes>
+          <Route path="/" exact element={<Home />} />
+          <Route path="/about" element={<About />}/>
+        </Routes>
+      </Router>
+    </div>
   )
 }
 
